@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.pb.apixuweather.R;
-import com.example.pb.apixuweather.data.ForecastDay;
-import com.example.pb.apixuweather.data.ForecastRepository;
+import com.example.pb.apixuweather.model.ForecastDay;
+import com.example.pb.apixuweather.model.ForecastRepository;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

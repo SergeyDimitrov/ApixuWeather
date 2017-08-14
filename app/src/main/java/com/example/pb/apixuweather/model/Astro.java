@@ -1,4 +1,4 @@
-package com.example.pb.apixuweather.data;
+package com.example.pb.apixuweather.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

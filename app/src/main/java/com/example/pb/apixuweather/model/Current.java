@@ -1,4 +1,4 @@
-package com.example.pb.apixuweather.data;
+package com.example.pb.apixuweather.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

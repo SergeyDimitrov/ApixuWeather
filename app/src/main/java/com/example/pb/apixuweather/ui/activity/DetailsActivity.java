@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.pb.apixuweather.R;
-import com.example.pb.apixuweather.data.ForecastDay;
+import com.example.pb.apixuweather.model.ForecastDay;
 import com.example.pb.apixuweather.ui.fragment.DetailsFragment;
 
 public class DetailsActivity extends AppCompatActivity {

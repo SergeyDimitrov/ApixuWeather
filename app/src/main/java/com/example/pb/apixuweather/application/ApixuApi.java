@@ -1,6 +1,6 @@
-package com.example.pb.apixuweather.network;
+package com.example.pb.apixuweather.application;
 
-import com.example.pb.apixuweather.data.ForecastRepository;
+import com.example.pb.apixuweather.model.ForecastRepository;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

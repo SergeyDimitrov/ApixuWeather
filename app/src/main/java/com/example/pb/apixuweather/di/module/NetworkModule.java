@@ -1,7 +1,8 @@
-package com.example.pb.apixuweather.network;
+package com.example.pb.apixuweather.di.module;
 
-import android.app.Application;
+import android.content.Context;
 
+import com.example.pb.apixuweather.application.ApixuApi;
 import com.example.pb.apixuweather.utils.CacheControlInterceptor;
 
 import java.io.File;
@@ -25,19 +26,19 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    Cache provideOkHttpCache(Application application) {
-        File cacheDir = new File(application.getCacheDir(), "http");
+    Cache provideOkHttpCache(Context context) {
+        File cacheDir = new File(context.getCacheDir(), "http");
         return new Cache(cacheDir, DISK_CACHE_SIZE);
     }
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(final Application application, Cache cache) {
+    OkHttpClient provideOkHttpClient(final Context context, Cache cache) {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
         clientBuilder.connectTimeout(CONNECTION_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         clientBuilder.readTimeout(CONNECTION_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-        clientBuilder.addInterceptor(new CacheControlInterceptor(application));
-        clientBuilder.addNetworkInterceptor(new CacheControlInterceptor(application));
+        clientBuilder.addInterceptor(new CacheControlInterceptor(context));
+        clientBuilder.addNetworkInterceptor(new CacheControlInterceptor(context));
         clientBuilder.cache(cache);
         return clientBuilder.build();
     }

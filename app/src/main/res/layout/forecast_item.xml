@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/forecast_item_padding"
     android:background="@drawable/touch_selector">
 
-    <com.example.pb.apixuweather.view.SquareImageView
+    <com.example.pb.apixuweather.ui.view.SquareImageView
         android:id="@+id/forecast_item_icon"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

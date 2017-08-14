@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.pb.apixuweather.ApixuWeatherApplication;
+import com.example.pb.apixuweather.application.ApixuWeatherApplication;
 import com.example.pb.apixuweather.R;
-import com.example.pb.apixuweather.data.ForecastDay;
-import com.example.pb.apixuweather.data.ForecastRepository;
-import com.example.pb.apixuweather.network.ApixuApi;
+import com.example.pb.apixuweather.model.ForecastDay;
+import com.example.pb.apixuweather.model.ForecastRepository;
+import com.example.pb.apixuweather.application.ApixuApi;
 import com.example.pb.apixuweather.ui.activity.DetailsActivity;
 import com.example.pb.apixuweather.ui.adapter.ForecastAdapter;
 
@@ -36,7 +36,7 @@ public class MainFragment extends BaseFragment implements Callback<ForecastRepos
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ApixuWeatherApplication.get(getContext()).getMainComponent().inject(this);
+        ApixuWeatherApplication.get(getContext()).getApplicationComponent().inject(this);
         forecastAdapter = new ForecastAdapter(getContext());
         forecastAdapter.setListener(new ForecastAdapter.OnForecastItemClickListener() {
             @Override

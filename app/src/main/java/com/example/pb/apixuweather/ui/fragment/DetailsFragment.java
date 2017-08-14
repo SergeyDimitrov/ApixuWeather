@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.pb.apixuweather.R;
-import com.example.pb.apixuweather.data.ForecastDay;
+import com.example.pb.apixuweather.model.ForecastDay;
 
 public class DetailsFragment extends BaseFragment {
 
