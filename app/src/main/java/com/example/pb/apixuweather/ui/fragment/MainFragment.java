@@ -8,35 +8,43 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.pb.apixuweather.application.ApixuWeatherApplication;
 import com.example.pb.apixuweather.R;
 import com.example.pb.apixuweather.model.ForecastDay;
 import com.example.pb.apixuweather.model.ForecastRepository;
 import com.example.pb.apixuweather.application.ApixuApi;
+import com.example.pb.apixuweather.mvp.presenter.ForecastLoaderPresenter;
+import com.example.pb.apixuweather.mvp.view.ForecastLoaderView;
 import com.example.pb.apixuweather.ui.activity.DetailsActivity;
 import com.example.pb.apixuweather.ui.adapter.ForecastAdapter;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainFragment extends BaseFragment implements Callback<ForecastRepository> {
+public class MainFragment extends BaseFragment implements ForecastLoaderView {
 
-    @BindView(R.id.main_forecast_list) RecyclerView forecastList;
+    @InjectPresenter
+    ForecastLoaderPresenter forecastLoaderPresenter;
+
+    @BindView(R.id.main_forecast_list)
+    RecyclerView forecastList;
+    @BindView(R.id.list_load_progress)
+    ProgressBar progressBar;
 
     private ForecastAdapter forecastAdapter;
-    private Call<ForecastRepository> call;
-
-    @Inject ApixuApi apixuApi;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ApixuWeatherApplication.get(getContext()).getApplicationComponent().inject(this);
         forecastAdapter = new ForecastAdapter(getContext());
         forecastAdapter.setListener(new ForecastAdapter.OnForecastItemClickListener() {
             @Override
@@ -64,16 +72,7 @@ public class MainFragment extends BaseFragment implements Callback<ForecastRepos
     @Override
     public void onStart() {
         super.onStart();
-        call = apixuApi.loadForecast(ApixuApi.API_KEY, ApixuApi.CITY_REQUEST, ApixuApi.DAYS_NUMBER_REQUEST);
-        call.enqueue(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (call != null) {
-            call.cancel();
-        }
+        forecastLoaderPresenter.startLoading();
     }
 
     @Override
@@ -83,16 +82,18 @@ public class MainFragment extends BaseFragment implements Callback<ForecastRepos
     }
 
     @Override
-    public void onResponse(Call<ForecastRepository> call, Response<ForecastRepository> response) {
-        if (response == null) {
-            forecastAdapter.setForecastRepository(null);
-        } else {
-            forecastAdapter.setForecastRepository(response.body());
-        }
+    public void setForecastRepository(ForecastRepository forecastRepository) {
+        forecastAdapter.setForecastRepository(forecastRepository);
     }
 
     @Override
-    public void onFailure(Call<ForecastRepository> call, Throwable t) {
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        forecastList.setVisibility(View.INVISIBLE);
+    }
 
+    public void hideProgress() {
+        progressBar.setVisibility(View.INVISIBLE);
+        forecastList.setVisibility(View.VISIBLE);
     }
 }

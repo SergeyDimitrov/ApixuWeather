@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:weightSum="1"
     android:paddingRight="@dimen/forecast_item_padding"
-    android:background="@drawable/touch_selector">
+    android:background="@drawable/touch_selector"
+    tools:ignore="RtlSymmetry">
 
     <com.example.pb.apixuweather.ui.view.SquareImageView
         android:id="@+id/forecast_item_icon"

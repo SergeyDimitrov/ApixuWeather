@@ -10,7 +10,7 @@ import com.example.pb.apixuweather.di.module.NetworkModule;
 
 public class ApixuWeatherApplication extends Application {
 
-    private ApplicationComponent applicationComponent;
+    private static ApplicationComponent applicationComponent;
 
     public static ApixuWeatherApplication get(Context context) {
         return (ApixuWeatherApplication) context.getApplicationContext();
@@ -25,7 +25,7 @@ public class ApixuWeatherApplication extends Application {
                 .build();
     }
 
-    public ApplicationComponent getApplicationComponent() {
+    public static ApplicationComponent getApplicationComponent() {
         return applicationComponent;
     }
 }

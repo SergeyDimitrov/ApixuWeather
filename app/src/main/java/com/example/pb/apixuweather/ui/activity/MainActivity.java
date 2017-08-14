@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.example.pb.apixuweather.R;
 import com.example.pb.apixuweather.ui.fragment.MainFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

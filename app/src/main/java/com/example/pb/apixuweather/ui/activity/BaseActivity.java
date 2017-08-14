@@ -1,6 +1,6 @@
 package com.example.pb.apixuweather.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import com.arellomobile.mvp.MvpAppCompatActivity;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends MvpAppCompatActivity {
 }

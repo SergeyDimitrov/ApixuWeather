@@ -6,9 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.arellomobile.mvp.MvpAppCompatFragment;
+
 import butterknife.ButterKnife;
 
-public abstract class BaseFragment extends Fragment {
+public class BaseFragment extends MvpAppCompatFragment {
+
     @CallSuper
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

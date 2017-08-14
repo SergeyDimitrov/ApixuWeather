@@ -10,7 +10,7 @@ import com.example.pb.apixuweather.R;
 import com.example.pb.apixuweather.model.ForecastDay;
 import com.example.pb.apixuweather.ui.fragment.DetailsFragment;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
