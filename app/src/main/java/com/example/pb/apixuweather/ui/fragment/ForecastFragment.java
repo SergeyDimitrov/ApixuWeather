@@ -10,27 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.example.pb.apixuweather.application.ApixuWeatherApplication;
 import com.example.pb.apixuweather.R;
 import com.example.pb.apixuweather.model.ForecastDay;
 import com.example.pb.apixuweather.model.ForecastRepository;
-import com.example.pb.apixuweather.application.ApixuApi;
 import com.example.pb.apixuweather.mvp.presenter.ForecastLoaderPresenter;
 import com.example.pb.apixuweather.mvp.view.ForecastLoaderView;
 import com.example.pb.apixuweather.ui.activity.DetailsActivity;
 import com.example.pb.apixuweather.ui.adapter.ForecastAdapter;
-
-import javax.inject.Inject;
+import com.example.pb.apixuweather.utils.AnimationUtils;
+import com.example.pb.apixuweather.utils.ScreenUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class MainFragment extends BaseFragment implements ForecastLoaderView {
+public class ForecastFragment extends BaseFragment implements ForecastLoaderView {
 
     @InjectPresenter
     ForecastLoaderPresenter forecastLoaderPresenter;
@@ -89,11 +82,11 @@ public class MainFragment extends BaseFragment implements ForecastLoaderView {
     @Override
     public void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
-        forecastList.setVisibility(View.INVISIBLE);
+        forecastList.setTranslationY(ScreenUtils.getScreenHeight(getContext()));
     }
 
     public void hideProgress() {
         progressBar.setVisibility(View.INVISIBLE);
-        forecastList.setVisibility(View.VISIBLE);
+        AnimationUtils.slideUpAnimation(forecastList);
     }
 }

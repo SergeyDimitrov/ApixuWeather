@@ -4,7 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-public final class NetworkUtils {
+@SuppressWarnings("WeakerAccess")
+public class NetworkUtils {
 
     public static boolean isNetworkAvailable(Context c) {
         ConnectivityManager cm =
