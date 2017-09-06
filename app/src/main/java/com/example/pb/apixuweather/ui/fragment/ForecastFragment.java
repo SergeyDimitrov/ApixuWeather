@@ -1,8 +1,8 @@
 package com.example.pb.apixuweather.ui.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,26 +12,24 @@ import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.pb.apixuweather.R;
-import com.example.pb.apixuweather.model.ForecastDay;
 import com.example.pb.apixuweather.model.ForecastRepository;
 import com.example.pb.apixuweather.mvp.presenter.ForecastLoaderPresenter;
 import com.example.pb.apixuweather.mvp.view.ForecastLoaderView;
-import com.example.pb.apixuweather.ui.activity.DetailsActivity;
 import com.example.pb.apixuweather.ui.adapter.ForecastAdapter;
 import com.example.pb.apixuweather.utils.AnimationUtils;
 import com.example.pb.apixuweather.utils.ScreenUtils;
 
 import butterknife.BindView;
 
+import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
+
 public class ForecastFragment extends BaseFragment implements ForecastLoaderView {
 
     @InjectPresenter
     ForecastLoaderPresenter forecastLoaderPresenter;
 
-    @BindView(R.id.main_forecast_list)
-    RecyclerView forecastList;
-    @BindView(R.id.list_load_progress)
-    ProgressBar progressBar;
+    @BindView(R.id.main_forecast_list) RecyclerView forecastList;
+    @BindView(R.id.list_load_progress) ProgressBar progressBar;
 
     private ForecastAdapter forecastAdapter;
 
@@ -39,14 +37,6 @@ public class ForecastFragment extends BaseFragment implements ForecastLoaderView
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         forecastAdapter = new ForecastAdapter(getContext());
-        forecastAdapter.setListener(new ForecastAdapter.OnForecastItemClickListener() {
-            @Override
-            public void OnForecastItemClick(ForecastDay forecastDay) {
-                Intent intent = new Intent(getContext(), DetailsActivity.class);
-                intent.putExtra(DetailsFragment.FORECAST_DAY_KEY, forecastDay);
-                startActivity(intent);
-            }
-        });
     }
 
     @Nullable
@@ -60,18 +50,13 @@ public class ForecastFragment extends BaseFragment implements ForecastLoaderView
         super.onViewCreated(view, savedInstanceState);
         forecastList.setAdapter(forecastAdapter);
         forecastList.setLayoutManager(new LinearLayoutManager(getContext()));
+        forecastList.addItemDecoration(new DividerItemDecoration(getContext(), VERTICAL));
     }
 
     @Override
     public void onStart() {
         super.onStart();
         forecastLoaderPresenter.startLoading();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        forecastAdapter.setListener(ForecastAdapter.OnForecastItemClickListener.DUMMY);
     }
 
     @Override

@@ -2,53 +2,66 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:weightSum="1"
-    android:paddingRight="@dimen/forecast_item_padding"
-    android:background="@drawable/touch_selector"
-    tools:ignore="RtlSymmetry">
-
-    <com.example.pb.apixuweather.ui.view.SquareImageView
-        android:id="@+id/forecast_item_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical" />
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1">
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:weightSum="1"
+        android:paddingRight="@dimen/forecast_item_padding"
+        android:background="@drawable/touch_selector"
+        tools:ignore="RtlSymmetry">
+
+        <com.example.pb.apixuweather.ui.view.SquareImageView
+            android:id="@+id/forecast_item_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/forecast_item_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:id="@+id/forecast_item_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/forecast_item_day"
+            android:id="@+id/forecast_item_temp_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+            android:layout_marginEnd="@dimen/forecast_temperature_space"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="?android:textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/forecast_item_weather"
+            android:id="@+id/forecast_item_temp_night"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:layout_gravity="center_vertical"
+            android:textAppearance="?android:textAppearanceSmall" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/forecast_item_temp_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/forecast_temperature_space"
-        android:layout_gravity="center_vertical"
-        android:textAppearance="?android:textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/forecast_item_temp_night"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:textAppearance="?android:textAppearanceSmall" />
+    <FrameLayout
+        android:id="@+id/forecast_details_container"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        android:background="@color/black" />
 </LinearLayout>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ApixuWeather</string>
+
+    <string name="temperature" translatable="false">%.0f°</string>
 </resources>
