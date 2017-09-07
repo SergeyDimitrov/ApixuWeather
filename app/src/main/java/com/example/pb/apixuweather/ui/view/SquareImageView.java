@@ -20,9 +20,9 @@ public class SquareImageView extends AppCompatImageView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(heightMeasureSpec, heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        int height = getMeasuredHeight();
-        setMeasuredDimension(height, height);
+        int maxDim = Math.max(getMeasuredHeight(), getMeasuredWidth());
+        setMeasuredDimension(maxDim, maxDim);
     }
 }

@@ -171,6 +171,10 @@ public class ForecastHour implements Parcelable {
         return time;
     }
 
+    public String getHourTime() {
+        return time.substring(time.length() - 5);
+    }
+
     public double getTempC() {
         return tempC;
     }
