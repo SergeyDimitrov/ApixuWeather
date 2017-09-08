@@ -15,6 +15,9 @@ import com.example.pb.apixuweather.model.ForecastDay;
 import com.example.pb.apixuweather.model.ForecastRepository;
 import com.example.pb.apixuweather.utils.TextFormatUtils;
 
+import java.util.Objects;
+import java.util.UUID;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -31,6 +34,9 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
     }
 
     public void setForecastRepository(ForecastRepository forecastRepository) {
+        if (Objects.equals(this.forecastRepository, forecastRepository)) {
+            return;
+        }
         this.forecastRepository = forecastRepository;
         notifyDataSetChanged();
     }
@@ -42,6 +48,10 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
     @Override
     public void onBindViewHolder(ForecastHolder holder, int position) {
+        UUID oldForecastId = holder.getForecastId();
+        if (Objects.equals(forecastRepository.getId(), oldForecastId)) {
+            return;
+        }
         ForecastDay forecastDay = forecastRepository.getForecast().getForecastDay().get(position);
         Glide.with(context).load("http:" + forecastDay.getDay().getCondition().getIcon()).into(holder.icon);
         holder.day.setText(forecastDay.getDate());
@@ -50,6 +60,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         holder.tempNight.setText(TextFormatUtils.getFormattedTemperature(context, forecastDay.getDay().getMintempC()));
         holder.detailsList.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.detailsList.setAdapter(new DetailsAdapter(context, forecastDay));
+        holder.setForecastId(forecastRepository.getId());
     }
 
     @Override
@@ -66,9 +77,19 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         @BindView(R.id.forecast_item_temp_night) TextView tempNight;
         @BindView(R.id.forecast_details_list) RecyclerView detailsList;
 
+        private UUID forecastId;
+
         public ForecastHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+        }
+
+        public UUID getForecastId() {
+            return forecastId;
+        }
+
+        public void setForecastId(UUID forecastId) {
+            this.forecastId = forecastId;
         }
     }
 }
