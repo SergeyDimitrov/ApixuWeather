@@ -1,14 +1,14 @@
 package com.example.pb.apixuweather.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.UUID;
 
-public class ForecastDay implements Parcelable {
+public class ForecastDay {
+    
+    private UUID id;
 
     @SerializedName("date")
     @Expose
@@ -30,24 +30,9 @@ public class ForecastDay implements Parcelable {
     @Expose
     private List<ForecastHour> hour;
 
-    protected ForecastDay(Parcel in) {
-        date = in.readString();
-        dateEpoch = in.readInt();
-        day = in.readParcelable(Day.class.getClassLoader());
-        astro = in.readParcelable(Astro.class.getClassLoader());
+    public ForecastDay() {
+        id = UUID.randomUUID();
     }
-
-    public static final Creator<ForecastDay> CREATOR = new Creator<ForecastDay>() {
-        @Override
-        public ForecastDay createFromParcel(Parcel in) {
-            return new ForecastDay(in);
-        }
-
-        @Override
-        public ForecastDay[] newArray(int size) {
-            return new ForecastDay[size];
-        }
-    };
 
     public String getDate() {
         return date;
@@ -69,17 +54,7 @@ public class ForecastDay implements Parcelable {
         return hour;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(date);
-        parcel.writeInt(dateEpoch);
-        parcel.writeParcelable(day, i);
-        parcel.writeParcelable(astro, i);
-        parcel.writeList(hour);
+    public UUID getId() {
+        return id;
     }
 }

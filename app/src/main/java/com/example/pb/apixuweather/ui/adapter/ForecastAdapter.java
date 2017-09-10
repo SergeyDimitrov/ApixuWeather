@@ -48,19 +48,24 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
     @Override
     public void onBindViewHolder(ForecastHolder holder, int position) {
+        ForecastDay forecastDay = forecastRepository.getForecast().getForecastDay().get(position);
         UUID oldForecastId = holder.getForecastId();
-        if (Objects.equals(forecastRepository.getId(), oldForecastId)) {
+        if (Objects.equals(forecastDay.getId(), oldForecastId)) {
             return;
         }
-        ForecastDay forecastDay = forecastRepository.getForecast().getForecastDay().get(position);
         Glide.with(context).load("http:" + forecastDay.getDay().getCondition().getIcon()).into(holder.icon);
         holder.day.setText(forecastDay.getDate());
         holder.weather.setText(forecastDay.getDay().getCondition().getText());
         holder.tempDay.setText(TextFormatUtils.getFormattedTemperature(context, forecastDay.getDay().getMaxtempC()));
         holder.tempNight.setText(TextFormatUtils.getFormattedTemperature(context, forecastDay.getDay().getMintempC()));
-        holder.detailsList.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-        holder.detailsList.setAdapter(new DetailsAdapter(context, forecastDay));
-        holder.setForecastId(forecastRepository.getId());
+        if (oldForecastId == null) {
+            holder.detailsList.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+            holder.detailsList.setAdapter(new DetailsAdapter(context, forecastDay));
+        } else {
+            DetailsAdapter adapter = (DetailsAdapter) holder.detailsList.getAdapter();
+            adapter.setForecast(forecastDay);
+        }
+        holder.setForecastId(forecastDay.getId());
     }
 
     @Override

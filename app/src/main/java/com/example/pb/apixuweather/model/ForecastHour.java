@@ -1,12 +1,9 @@
 package com.example.pb.apixuweather.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ForecastHour implements Parcelable {
+public class ForecastHour {
 
     @SerializedName("time_epoch")
     @Expose
@@ -119,49 +116,6 @@ public class ForecastHour implements Parcelable {
     @SerializedName("vis_miles")
     @Expose
     private double visMiles;
-
-    protected ForecastHour(Parcel in) {
-        timeEpoch = in.readInt();
-        time = in.readString();
-        tempC = in.readDouble();
-        tempF = in.readDouble();
-        isDay = in.readInt();
-        condition = in.readParcelable(Condition.class.getClassLoader());
-        windMph = in.readDouble();
-        windKph = in.readDouble();
-        windDegree = in.readInt();
-        windDir = in.readString();
-        pressureMb = in.readDouble();
-        pressureIn = in.readDouble();
-        precipMm = in.readDouble();
-        precipIn = in.readDouble();
-        humidity = in.readInt();
-        cloud = in.readInt();
-        feelslikeC = in.readDouble();
-        feelslikeF = in.readDouble();
-        windchillC = in.readDouble();
-        windchillF = in.readDouble();
-        heatindexC = in.readDouble();
-        heatindexF = in.readDouble();
-        dewpointC = in.readDouble();
-        dewpointF = in.readDouble();
-        willItRain = in.readInt();
-        willItSnow = in.readInt();
-        visKm = in.readDouble();
-        visMiles = in.readDouble();
-    }
-
-    public static final Creator<ForecastHour> CREATOR = new Creator<ForecastHour>() {
-        @Override
-        public ForecastHour createFromParcel(Parcel in) {
-            return new ForecastHour(in);
-        }
-
-        @Override
-        public ForecastHour[] newArray(int size) {
-            return new ForecastHour[size];
-        }
-    };
 
     public int getTimeEpoch() {
         return timeEpoch;
@@ -277,42 +231,5 @@ public class ForecastHour implements Parcelable {
 
     public double getVisMiles() {
         return visMiles;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(timeEpoch);
-        parcel.writeString(time);
-        parcel.writeDouble(tempC);
-        parcel.writeDouble(tempF);
-        parcel.writeInt(isDay);
-        parcel.writeParcelable(condition, i);
-        parcel.writeDouble(windMph);
-        parcel.writeDouble(windKph);
-        parcel.writeInt(windDegree);
-        parcel.writeString(windDir);
-        parcel.writeDouble(pressureMb);
-        parcel.writeDouble(pressureIn);
-        parcel.writeDouble(precipMm);
-        parcel.writeDouble(precipIn);
-        parcel.writeInt(humidity);
-        parcel.writeInt(cloud);
-        parcel.writeDouble(feelslikeC);
-        parcel.writeDouble(feelslikeF);
-        parcel.writeDouble(windchillC);
-        parcel.writeDouble(windchillF);
-        parcel.writeDouble(heatindexC);
-        parcel.writeDouble(heatindexF);
-        parcel.writeDouble(dewpointC);
-        parcel.writeDouble(dewpointF);
-        parcel.writeInt(willItRain);
-        parcel.writeInt(willItSnow);
-        parcel.writeDouble(visKm);
-        parcel.writeDouble(visMiles);
     }
 }

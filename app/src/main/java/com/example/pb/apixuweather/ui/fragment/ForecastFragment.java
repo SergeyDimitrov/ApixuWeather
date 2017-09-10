@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.pb.apixuweather.R;
+import com.example.pb.apixuweather.application.ApixuApi;
 import com.example.pb.apixuweather.model.ForecastRepository;
 import com.example.pb.apixuweather.mvp.presenter.ForecastLoaderPresenter;
 import com.example.pb.apixuweather.mvp.view.ForecastLoaderView;
@@ -51,6 +52,7 @@ public class ForecastFragment extends BaseFragment implements ForecastLoaderView
         forecastList.setAdapter(forecastAdapter);
         forecastList.setLayoutManager(new LinearLayoutManager(getContext()));
         forecastList.addItemDecoration(new DividerItemDecoration(getContext(), VERTICAL));
+        forecastList.setItemViewCacheSize(ApixuApi.DAYS_NUMBER_REQUEST);
     }
 
     @Override

@@ -1,12 +1,9 @@
 package com.example.pb.apixuweather.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Day implements Parcelable {
+public class Day {
 
     @SerializedName("maxtemp_c")
     @Expose
@@ -64,35 +61,6 @@ public class Day implements Parcelable {
     @Expose
     private Condition condition;
 
-    protected Day(Parcel in) {
-        maxtempC = in.readDouble();
-        maxtempF = in.readDouble();
-        mintempC = in.readDouble();
-        mintempF = in.readDouble();
-        avgtempC = in.readDouble();
-        avgtempF = in.readDouble();
-        maxwindMph = in.readDouble();
-        maxwindKph = in.readDouble();
-        totalprecipMm = in.readDouble();
-        totalprecipIn = in.readDouble();
-        avgvisKm = in.readDouble();
-        avgvisMiles = in.readDouble();
-        avghumidity = in.readDouble();
-        condition = in.readParcelable(Condition.class.getClassLoader());
-    }
-
-    public static final Creator<Day> CREATOR = new Creator<Day>() {
-        @Override
-        public Day createFromParcel(Parcel in) {
-            return new Day(in);
-        }
-
-        @Override
-        public Day[] newArray(int size) {
-            return new Day[size];
-        }
-    };
-
     public double getMaxtempC() {
         return maxtempC;
     }
@@ -147,28 +115,5 @@ public class Day implements Parcelable {
 
     public Condition getCondition() {
         return condition;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeDouble(maxtempC);
-        parcel.writeDouble(maxtempF);
-        parcel.writeDouble(mintempC);
-        parcel.writeDouble(mintempF);
-        parcel.writeDouble(avgtempC);
-        parcel.writeDouble(avgtempF);
-        parcel.writeDouble(maxwindMph);
-        parcel.writeDouble(maxwindKph);
-        parcel.writeDouble(totalprecipMm);
-        parcel.writeDouble(totalprecipIn);
-        parcel.writeDouble(avgvisKm);
-        parcel.writeDouble(avgvisMiles);
-        parcel.writeDouble(avghumidity);
-        parcel.writeParcelable(condition, i);
     }
 }

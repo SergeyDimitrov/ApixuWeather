@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 @SuppressWarnings("WeakerAccess")
 public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailHolder> {
 
-    private final ForecastDay forecastDay;
+    private ForecastDay forecastDay;
     private final Context context;
     private final LayoutInflater inflater;
 
@@ -46,6 +46,11 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailHo
     @Override
     public int getItemCount() {
         return forecastDay.getHour().size();
+    }
+
+    public void setForecast(ForecastDay forecastDay) {
+        this.forecastDay = forecastDay;
+        notifyDataSetChanged();
     }
 
     public class DetailHolder extends RecyclerView.ViewHolder {
