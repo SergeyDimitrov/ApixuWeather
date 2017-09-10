@@ -36,9 +36,6 @@ public class AnimationUtils {
 
         ValueAnimator viewAnimator = ValueAnimator.ofFloat(oldHeight, newHeight);
         viewAnimator.setDuration(ANIMATION_DURATION).addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-            private float initY = v.getY();
-
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 Float value = (Float) valueAnimator.getAnimatedValue();

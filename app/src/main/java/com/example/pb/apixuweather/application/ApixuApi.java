@@ -2,6 +2,7 @@ package com.example.pb.apixuweather.application;
 
 import com.example.pb.apixuweather.model.ForecastRepository;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -15,5 +16,5 @@ public interface ApixuApi {
     String CITY_REQUEST = "Samara";
 
     @GET("forecast.json")
-    Call<ForecastRepository> loadForecast(@Query("key") String key, @Query("q") String city, @Query("days") int days);
+    Observable<ForecastRepository> loadForecast(@Query("key") String key, @Query("q") String city, @Query("days") int days);
 }
