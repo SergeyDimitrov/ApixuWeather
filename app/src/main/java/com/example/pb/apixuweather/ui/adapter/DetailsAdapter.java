@@ -45,6 +45,9 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailHo
 
     @Override
     public int getItemCount() {
+        if (forecastDay.getHour() == null) {
+            return 0;
+        }
         return forecastDay.getHour().size();
     }
 
