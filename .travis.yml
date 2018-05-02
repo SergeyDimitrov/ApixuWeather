@@ -28,6 +28,7 @@ android:
   - extra-android-support
   - sys-img-$ANDROID_ABI-google_apis-$ANDROID_EMU_API_LEVEL
 before_script:
+  - chmod +x gradlew
   - echo -e "Host github.com\n\tHostName github.com\n\tUser git\n\tIdentityFile ~/.ssh/id_travisci\n" >> ~/.ssh/config
   - echo no | android create avd --force -n test -t android-$ANDROID_EMU_API_LEVEL --abi google_apis/$ANDROID_ABI
   - emulator -avd test -no-window &
